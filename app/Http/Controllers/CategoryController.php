@@ -19,7 +19,6 @@ use Illuminate\Http\Response;
  * )
  */
 
-
 class CategoryController extends Controller
 {
 
@@ -179,8 +178,14 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::firstOrFail($id);
+        // Find the category by its ID or fail
+        $category = Category::findOrFail($id);
+
+        // Delete the category
         $category->delete();
-        return $this->success([]);
+
+        // Return a successful response (optional, can include a message if desired)
+        return response()->json(['message' => 'Category deleted successfully.'], 200);
     }
+
 }

@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Cache;
 class ProductController extends Controller
 {
 
-
     /**
      * @OA\Get(
      *     path="/api/popular-products",
@@ -74,7 +73,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return $this->success(ProductResource::collection($products->load('categories')));
+        return ProductResource::collection($products->load('categories'));
     }
 
     /**
@@ -120,7 +119,7 @@ class ProductController extends Controller
         }
         // event(new ProductCreatedOrUpdate($product));
         
-        return $this->success(new ProductResource($product->load('categories')));
+        return new ProductResource($product->load('categories'));
     }
 
 

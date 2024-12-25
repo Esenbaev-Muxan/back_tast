@@ -60,9 +60,8 @@ class UserController extends Controller
             }
         }
 
-        return $this->success([
-            "token" => $user->createToken("token")->plainTextToken
-        ]);
+        $token = $user->createToken('auth_token')->plainTextToken;
+        return response()->json(['user' => $user, 'access_token' => $token], 201);
     }
 
     public function register(RegisterRequest $request)

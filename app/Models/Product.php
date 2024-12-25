@@ -53,7 +53,6 @@ class Product extends Model
          static::saved(function ($product) {
             // Очистка кеша после изменения товара
             Cache::forget('popular-products-cache');
-            
             // Генерация события
             event(new ProductUpdated($product)); 
         });
